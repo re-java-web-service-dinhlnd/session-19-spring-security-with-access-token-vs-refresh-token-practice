@@ -15,8 +15,10 @@ import java.util.Date;
 public class TokenProvider {
     @Value("${app.jwt.access-expires-in-mil-seconds}")
     private String accessExpInMil;
+
     @Value("${app.jwt.secret}")
     private String jwtSecret;
+
     private SecretKey secretKey;
 
     @PostConstruct

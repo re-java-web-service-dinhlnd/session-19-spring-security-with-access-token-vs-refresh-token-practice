@@ -1,13 +1,18 @@
 package com.re.mapper.impl;
 
 import com.re.dto.UserDetailsDto;
+import com.re.dto.UserLoginDto;
 import com.re.dto.UserProfileDto;
 import com.re.dto.response.UserUpdateResponse;
 import com.re.entity.User;
 import com.re.entity.UserRole;
 import com.re.mapper.UserMapper;
+import com.re.security.UserDetailsImpl;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +20,24 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapperImpl implements UserMapper {
+    @Override
+    public UserLoginDto toUserLogin(Object userPrincipal) {
+        if (userPrincipal instanceof UserDetailsImpl userDetails) {
+            return UserLoginDto.builder()
+                    .id(userDetails.getId())
+                    .email(userDetails.getEmail())
+                    .username(userDetails.getUsername())
+                    .fullName(userDetails.getFullName())
+                    .roles(userDetails.getAuthorities().stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .collect(Collectors.toSet()))
+                    // Cắt bỏ phần nano giây để có định dạng yyyy-MM-ddTHH:mm:ss
+                    .lastLogin(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
+                    .build();
+        }
+        return null;
+    }
+
     @Override
     public UserDetailsDto toUserDetailsDto(User user) {
         if (user == null) return null;
