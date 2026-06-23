@@ -29,14 +29,14 @@ public class AuthController {
         return ResponseEntity.ok(loginResponse);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
-        RegisterResponse registerResponse = authService.handleRegister(registerRequest);
-
-        // Create a URI that points to a new resource (e.g., /api/users/{id})
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{id}")
-                .buildAndExpand(registerResponse.getUser().getId()).toUri();
-        return ResponseEntity.created(location).body(registerResponse);
-    }
+//    @PostMapping("/register")
+//    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
+//        RegisterResponse registerResponse = authService.handleRegister(registerRequest);
+//
+//        // Create a URI that points to a new resource (e.g., /api/users/{id})
+//        URI location = ServletUriComponentsBuilder
+//                .fromCurrentContextPath().path("/api/users/{id}")
+//                .buildAndExpand(registerResponse.getUser().getId()).toUri();
+//        return ResponseEntity.created(location).body(registerResponse);
+//    }
 }
