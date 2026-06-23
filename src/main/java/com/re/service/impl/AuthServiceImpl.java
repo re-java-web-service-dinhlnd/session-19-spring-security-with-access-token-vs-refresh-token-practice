@@ -25,8 +25,8 @@ public class AuthServiceImpl implements AuthService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
 
-    @Value("${}")
-    private Long accessTokenExpirationMs;
+    @Value("${app.jwt.access-expires-in-mili-seconds}")
+    private long accessTokenExpirationMs;
 
     @Override
     public LoginResponse handleLogin(LoginRequest loginRequest) {

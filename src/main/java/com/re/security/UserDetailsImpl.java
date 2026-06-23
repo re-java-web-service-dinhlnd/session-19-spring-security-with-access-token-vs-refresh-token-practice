@@ -52,4 +52,4 @@ public class UserDetailsImpl implements UserDetails {
         return "UserDetails(username=" + user.getUsername() + ")";
     }
 }
-}
+
