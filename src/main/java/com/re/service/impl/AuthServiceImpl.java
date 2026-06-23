@@ -2,6 +2,7 @@ package com.re.service.impl;
 
 import com.re.dto.request.LoginRequest;
 import com.re.dto.response.LoginResponse;
+import com.re.security.TokenProvider;
 import com.re.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class AuthServiceImpl implements AuthService {
+    private final TokenProvider tokenProvider;
 
     private final AuthenticationManager authenticationManager;
 
